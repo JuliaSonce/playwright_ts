@@ -1,5 +1,15 @@
 import { PlaywrightTestConfig } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+import dotenvExpand from 'dotenv-expand';
+const envFile = `./env/.env.${process.env.ENV || 'local'}`;
+const envConfig = dotenv.config({ path: envFile });
+dotenvExpand.expand(envConfig);
 
+console.log("\n\n==================================================================")
+console.log(`Running tests with env: ${process.env.ENV} from file: ${envFile}`)
+console.log(`Current  base URL: ${process.env.BASE_URL}`)
+console.log("==================================================================\n\n")
 const config: PlaywrightTestConfig = {
     testDir: './tests',
     timeout: 30000,
@@ -29,6 +39,6 @@ const config: PlaywrightTestConfig = {
             //     use: { browserName: 'webkit' },
             // },
         ],
-    };
-
-    export default config;
+    }
+}
+export default config;

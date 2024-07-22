@@ -11,6 +11,14 @@ export class HomePage extends AppPage {
 
     }
 
+    async clickSignUpBtn() {
+        try {
+            await this.singUpBtn.click();
+        } catch (error) {
+            console.log('Error during click action:', error);
+        }
+    }
+
 }
 
 
