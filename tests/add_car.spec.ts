@@ -1,19 +1,27 @@
-import { expect, test } from '@playwright/test';
-import { GaragePage } from '../app/Pages/garage.page';
 
-const car = {
-    brand: "BMW",
-    model: "X5",
-    mileage: "200"
-}
-test('Add new car', async ({ page }) => {
-    let garagePage = new GaragePage(page);
-    await garagePage.open(garagePage.pagePath)
-    await garagePage.clickAddCarrBtn();
-    // await expect(garagePage.addCarModal()).toBeVisible()// modal is visible on garage page
-    // let addCarContainer = garagePage.addCarModal();
-    // let addCar = new AddCar(page, addCarContainer)
-    // await addCar.addCar(car)
-    // await expect(garagePage.alertPopUp()).toBeVisible()
+import { test } from "../fixture/testGarage";
+import { DefaultUser } from "../data/enum/defaultUser"
+import { DefaultCar } from "../data/enum/defaultCar"
 
-})
+
+test.describe('Validate function of adding new car', () => {
+    test('Add new car', async ({ app: { homePage, signIn, garagePage } }) => {
+        const defaultUser = DefaultUser
+        const defaultCar = DefaultCar
+
+        await homePage.open()
+        await homePage.clickSignInBtn()
+        await signIn.expectLoaded()
+        await signIn.signIn({ email: DefaultUser.email, password: DefaultUser.password })
+        await garagePage.expectLoaded()
+        await garagePage.clickAddCarrBtn()
+        await garagePage.addCarFormIsVisible()
+        await garagePage.addCar({ brand: DefaultCar.brand, model: DefaultCar.model })
+
+        await garagePage.validationOfAddedCar({ brand: DefaultCar.brand })
+        await garagePage.successAlertIsVisible()
+
+
+
+    });
+});

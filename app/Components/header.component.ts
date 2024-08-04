@@ -1,4 +1,4 @@
-import exp from "constants";
+
 import { Component } from "../abstractClasses";
 import { expect } from "@playwright/test";
 
@@ -16,8 +16,4 @@ export class Header extends Component {
         await expect(this.guestLoginBtn).toBeVisible();
         await expect(this.signInBtn).toBeVisible();
     }
-
-
-
-
 }

@@ -3,19 +3,21 @@ import { AppPage } from "../abstractClasses";
 import { Header } from "../Components/header.component";
 
 export class SignIn extends AppPage {
-    public pagePath = 'https://qauto2.forstudy.space/'
+    public pagePath = '/'
     public header = new Header(this.page)
 
 
     private emailInputField = this.page.locator('#signinEmail');
     private passwordInputField = this.page.locator('#signinPassword')
-    private loginBtn = this.page.locator('.btn btn-primary');;
+    private loginBtn = this.page.locator('//button[text()="Login"]');
+
+
 
 
     async expectLoaded() {
-        await expect(this.loginBtn).toBeVisible();
         await expect(this.emailInputField).toBeVisible();
         await expect(this.passwordInputField).toBeVisible();
+        await expect(this.loginBtn).toBeVisible();
 
     }
     async signIn(user: { email: string, password: string }) {
