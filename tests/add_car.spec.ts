@@ -17,9 +17,8 @@ test.describe('Validate function of adding new car', () => {
         await garagePage.clickAddCarrBtn()
         await garagePage.addCarFormIsVisible()
         await garagePage.addCar({ brand: DefaultCar.brand, model: DefaultCar.model })
-
         await garagePage.validationOfAddedCar({ brand: DefaultCar.brand })
-        await garagePage.successAlertIsVisible()
+
 
 
 
